@@ -13,6 +13,38 @@ require_once "./checkLogin.php";
 </head>
 
 <body>
+
+    <?php require_once "./menu.php" ?>
+
+    <div class="container-fluid">
+        <div class="row mt-5">
+            <div class="col-md-4">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <h4 class="card-title">user count :</h4>
+                        <p class="card-text">Body</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <h4 class="card-title">panel count :</h4>
+                        <p class="card-text">Body</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <h4 class="card-title">update info :</h4>
+                        <p class="card-text">no update</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="./assets/bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>
 
