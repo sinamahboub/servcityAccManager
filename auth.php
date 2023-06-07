@@ -6,8 +6,20 @@ $DB = new DB();
 
 $username = $_POST['username'];
 $password = $_POST['password'];
+$valid = true;
 
+if ($username == ""){
+    $valid = false;
+}
 
+if ($password == ""){
+    $valid = false;
+}
+
+if ($valid == false){
+    header("location:login.php");
+    exit;
+}
 
 $stmt = $DB->prepare("SELECT * FROM `users` WHERE username=:username");
 $stmt->bindValue(":username", $username);
