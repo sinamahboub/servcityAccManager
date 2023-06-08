@@ -1,3 +1,8 @@
+<?php
+require_once "./php/autoload.php";
+
+$Msg = new Msg();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,11 +10,21 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.min.css">
+    <title>Login</title>
+    <link rel="shortcut icon" href="./assets/images/servCityLogo.jpg" type="image/x-icon">
+    <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
 </head>
 
 <body>
+
+    <div class="container-fluid">
+        <div class="row mt-3">
+            <div class="col-md-12">
+                <?php $Msg->show() ?>
+            </div>
+        </div>
+    </div>
+
     <div class="row mt-5">
         <div class="col-md-4"></div>
         <div class="col-md-4">
@@ -37,7 +52,7 @@
         <div class="col-md-4"></div>
     </div>
 
-    <script src="./assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="./assets/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

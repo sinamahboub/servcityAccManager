@@ -3,6 +3,7 @@ require_once "./checkLogin.php";
 require_once "./php/autoload.php";
 
 $DB = new DB();
+$Msg = new Msg();
 
 $id = $_GET['id'];
 
@@ -13,9 +14,9 @@ $stmt = $DB->prepare("DELETE FROM `users` WHERE id=:id");
 $stmt->bindValue(":id", $id);
 $result = $stmt->execute();
 if (!$result) {
-    echo "no delete";
+    $Msg->error("undelete");
 } else {
-    echo "delete";
+    $Msg->success("delete");
 }
 
 header("location:index.php");

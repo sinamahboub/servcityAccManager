@@ -3,6 +3,7 @@ require_once "./checkLogin.php";
 require_once "./php/autoload.php";
 
 $DB = new DB();
+$Msg = new Msg();
 
 $stmt = $DB->prepare('SELECT COUNT(*) as count FROM users');
 $stmt->execute();
@@ -23,8 +24,9 @@ $listPanels = $stmt->fetchAll();
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>صفحه اصلی</title>
-    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.min.css">
+    <title>Main</title>
+    <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
+    <link rel="shortcut icon" href="./assets/images/servCityLogo.jpg" type="image/x-icon">
 </head>
 
 <body>
@@ -41,20 +43,27 @@ $listPanels = $stmt->fetchAll();
                         <a class="nav-link" data-bs-toggle="modal" data-bs-target="#users" href="">users</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="">panel</a>
+                        <a class="nav-link" data-bs-toggle="modal" data-bs-target="#panel" href="">panel</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="./signOut.php">sign out</a>
                     </li>
                 </ul>
                 <div class="d-flex">
-                    <h2 style="color: #fff;">vps</h2>
+                    <h2 style="color: #fff;"></h2>
                 </div>
             </div>
         </div>
     </nav>
 
     <div class="container-fluid">
+
+        <div class="row mt-3">
+            <div class="col-md-12">
+                <?php $Msg->show() ?>
+            </div>
+        </div>
+
         <div class="row mt-3">
             <div class="col-md-4">
                 <div class="card text-center">
@@ -135,54 +144,60 @@ $listPanels = $stmt->fetchAll();
 
                     <!-- Modal body -->
                     <div class="modal-body">
-                        <form action="">
+                        <form action="./addUser.php" method="post">
                             <input type="hidden" name="id" id="id" readonly>
 
 
                             <div class="mb-3 mt-1">
-                                <label for="email" class="form-label">username :</label>
-                                <input type="email" class="form-control" id="email" name="email">
+                                <label for="username" class="form-label">username :</label>
+                                <input type="text" class="form-control" id="username" name="username">
                             </div>
                             <div class="mb-3">
-                                <label for="password" class="form-label">name :</label>
-                                <input type="name" class="form-control" id="name" name="name">
+                                <label for="name" class="form-label">name :</label>
+                                <input type="text" class="form-control" id="name" name="name">
                             </div>
                             <div class="mb-3">
                                 <label for="password" class="form-label">password :</label>
                                 <input type="password" class="form-control" id="password" name="password">
                             </div>
                             <div class="mb-3">
-                                <label for="password" class="form-label">date :</label>
+                                <label for="date" class="form-label">date :</label>
                                 <input type="text" class="form-control" id="date" name="date">
                             </div>
                             <div class="mb-3">
-                                <label for="password" class="form-label">accType :</label>
+                                <label for="accType" class="form-label">accType :</label>
                                 <select id="accType" name="accType" class="form-control" required>
-                                    <option value="" selected>انتخاب کنید</option>
+                                    <option value="" selected>select</option>
                                     <?php foreach ($listPanels as $panels) : ?>
                                         <option value="<?= $panels->id ?>"><?= $panels->name ?></option>
                                     <?php endforeach ?>
                                 </select>
                             </div>
                             <div class="mb-3">
-                                <label for="password" class="form-label">telegram ID :</label>
+                                <label for="telegramId" class="form-label">telegram ID :</label>
                                 <input type="number" class="form-control" id="telegramId" name="telegramId">
                             </div>
                             <div class="mb-3">
-                                <label for="password" class="form-label">payment status :</label>
-                                <input type="" class="form-control" id="password" name="pswd">
+                                <label for="payStatus" class="form-label">payment status :</label>
+                                <select name="payStatus" id="payStatus" class="form-control">
+                                    <option value="0">unpaid</option>
+                                    <option value="1">Paid</option>
+                                </select>
                             </div>
                             <div class="mb-3">
-                                <label for="password" class="form-label">name :</label>
-                                <input type="password" class="form-control" id="password" name="pswd">
+                                <label for="accStatus" class="form-label">acc status :</label>
+                                <select name="accStatus" id="accStatus" class="form-control">
+                                    <option value="0">Inactive</option>
+                                    <option value="1">Active</option>
+                                </select>
                             </div>
                             <div class="mb-3">
-                                <label for="password" class="form-label">name :</label>
-                                <input type="password" class="form-control" id="password" name="pswd">
+                                <label for="about" class="form-label">about :</label>
+                                <textarea name="about" id="about" cols="15" rows="5" class="form-control"></textarea>
                             </div>
 
 
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type=" submit" class="btn btn-primary">Submit</button>
                         </form>
                     </div>
 
@@ -194,9 +209,35 @@ $listPanels = $stmt->fetchAll();
                 </div>
             </div>
         </div>
+
+        <!-- The Modal -->
+        <div class="modal fade" id="panel">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">panels</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        Modal body..
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
     </div>
 
-    <script src="./assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="./assets/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
